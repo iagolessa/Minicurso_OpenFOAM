@@ -1,0 +1,8 @@
+reset
+set xr[1800:]
+set multiplot layout 2,1
+plot "postProcessing/probes/0/p" us 1:2
+plot "postProcessing/probes/0/p" us 1:3
+unset multiplot
+pause 10
+reread

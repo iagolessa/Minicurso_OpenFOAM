@@ -1,0 +1,72 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default         steadyState;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(p)         cellLimited Gauss linear 1; //Gauss linear;
+    grad(x)         cellLimited Gauss linear 1;
+}
+
+divSchemes
+{
+    default         Gauss linear;
+    div(phi,U)      bounded Gauss linearUpwindV grad(x);
+    div(phi,k)      bounded Gauss linearUpwind grad(x);
+    div(phi,epsilon) bounded Gauss linearUpwind grad(x);
+    div(phi,omega)  bounded Gauss linearUpwind grad(x);
+    div(phi,R)        Gauss limitedLinear 1;
+    div(R)          Gauss linear;
+    div(phi,nuTilda) Gauss limitedLinear 1;	
+}
+
+laplacianSchemes
+{
+    default        Gauss linear orthogonal;// none;
+//     laplacian(nuEff,U) Gauss linear corrected;
+//     laplacian(DepsilonEff,epsilon) Gauss linear corrected;
+//     laplacian((1|A(U)),p) Gauss linear corrected;
+//     laplacian(DkEff,k) Gauss linear corrected;
+//     laplacian(DomegaEff,omega) Gauss linear corrected;
+//     laplacian(DREff,R) Gauss linear corrected;
+//     laplacian(DnuTildaEff,nuTilda) Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+    interpolate(U)  linear;
+}
+
+snGradSchemes
+{
+    default         orthogonal;
+}
+
+wallDist
+{
+    method meshWave;
+}
+
+
+
+// ************************************************************************* //
